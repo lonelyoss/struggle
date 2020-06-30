@@ -21,8 +21,6 @@ class Home extends BaseController
         if((!$result) && (!empty($result))){
             throw new DiaryException();
         }
-        return (new SuccessMessage([
-            'data'  => $result,
-        ]))->success();
+        return json($result,200);
     }
 }

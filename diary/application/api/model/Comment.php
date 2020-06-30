@@ -26,10 +26,17 @@ class Comment extends BaseModel
     }
 
     public function getCommentByDiaryId($parent_id,$diary_id){
-        $result = $this->with('user')
+        /*$result = $this->with('user')
             ->where('parent_id','=',$parent_id)
             ->where('diary_id','=',$diary_id)
             ->order('create_time','asc')
+            ->select();*/
+        $result = $this->alias('comment')
+            ->join('user','comment.uid = user.id')
+            ->where('parent_id','=',$parent_id)
+            ->where('diary_id','=',$diary_id)
+            ->field('user.name username,user.photo,comment.id,comment.parent_id,comment.content,comment.create_time')
+            ->order('comment.create_time','asc')
             ->select();
         return $result;
     }

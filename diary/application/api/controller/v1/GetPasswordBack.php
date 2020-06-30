@@ -16,6 +16,7 @@ use app\api\lib\exception\SuccessMessage;
 use app\api\lib\exception\UserException;
 use app\api\model\User as UserModel;
 use app\api\validate\CheckCode;
+use app\api\validate\CheckEmail;
 use app\api\validate\CheckPassword;
 use think\Cache;
 use think\Request;
@@ -30,7 +31,14 @@ class GetPasswordBack
      * @throws \think\Exception
      */
     public function createCode(Request $request){
+
         $params = $request->post();
+        if(!array_key_exists('email',$params)){
+            throw new EmailException([
+                'status'    =>400,
+                'msg'       =>'邮箱格式错误'
+            ]);
+        }
         $to = $params['email'];
         $code = mt_rand(1000,9999);
         $subject = 'Struggle Diary 验证码';

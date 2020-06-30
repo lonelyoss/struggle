@@ -53,11 +53,12 @@ class Book extends BaseController
         $book_model = new BookModel();
         $book = $book_model->getBookByUserId($request->param('id'));
         if(!$book){
-            throw new BookException();
+            throw new BookException([
+                'status'=>404,
+                'msg'   =>'该用户暂时没有日记本'
+            ]);
         }
-        return (new SuccessMessage([
-            'data'=>$book,
-        ]))->success();
+        return json($book,200);
     }
 
     public function delete(Request $request){

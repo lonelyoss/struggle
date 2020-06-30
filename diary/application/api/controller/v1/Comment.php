@@ -62,9 +62,7 @@ class Comment extends BaseController
         if(!$comment){
             throw new CommentException();
         }
-        return (new SuccessMessage([
-            'data'=>$comment
-        ]))->success();
+        return json($comment,200);
     }
 
     private function getComment($parent_id = 0,&$result = []){

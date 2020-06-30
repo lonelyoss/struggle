@@ -53,9 +53,9 @@ Route::get('api/:version/show/:id','app/api/:version.Show/get');
 Route::get('api/:version/user/:id','app/api/:version.User/get');
 
 //用户信息
-Route::post('api/:version/user_info/:id','app/api/:version.UserInfo/create');
+Route::put('api/:version/userInfo','app/api/:version.UserInfo/create');
 
-Route::get('api/:version/user_info/:id','app/api/:version.User/getUserInfo');
+Route::get('api/:version/userInfo/:id','app/api/:version.UserInfo/get');
 
 //日记评论
 Route::get('api/:version/comment/:id','app/api/:version.Comment/get');
@@ -69,14 +69,14 @@ Route::delete('api/:version/comment/:id','app/api/:version.Comment/delete');
 Route::put('api/:version/photo','app/api/:version.Photo/update');
 
 //电子邮箱
-Route::put('api/:version/email/:id','app/api/:version.Email/update');
+Route::put('api/:version/email','app/api/:version.Email/update');
 
 //修改密码
-Route::put('api/:version/password_modify/:id','app/api/:version.PasswordModify/update');
+Route::put('api/:version/passwordModify','app/api/:version.PasswordModify/update');
 
 //找回密码
-Route::delete('api/:version/check_code','app/api/:version.GetPasswordBack/checkCode');
+Route::delete('api/:version/passwordFind','app/api/:version.GetPasswordBack/checkCode');
 
-Route::post('api/:version/get_code','app/api/:version.GetPasswordBack/createCode');
+Route::post('api/:version/passwordFind','app/api/:version.GetPasswordBack/createCode');
 
-Route::put('api/:version/password_find','app/api/:version.GetPasswordBack/update');
+Route::put('api/:version/passwordFind','app/api/:version.GetPasswordBack/update');

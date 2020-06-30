@@ -11,6 +11,7 @@ namespace app\api\lib\exception;
 
 use Exception;
 use think\exception\Handle;
+use think\Log;
 
 class ExceptionHandles extends Handle
 {
@@ -30,14 +31,24 @@ class ExceptionHandles extends Handle
                 $this->status = 500;
                 $this->msg = '服务器内部错误，不告诉你';
                 $this->errorCode = 999999;
+                return $this->recordErrorLog($e);
             }
         }
         $result = [
             'status'    => $this->status,
             'msg'       => $this->msg,
             'errorCode' => $this->errorCode,
-            //'url'       =>request()->url(),
+            'url'       =>request()->url(),
         ];
-        return json($result);
+        return json($result,$result['status']);
+    }
+
+    private function recordErrorLog(Exception $e){
+        Log::init([
+            'type'=>'file',
+            'path'=>LOG_PATH,
+            'level'=>['error']
+        ]);
+        Log::record($e->getMessage(),['error']);
     }
 }

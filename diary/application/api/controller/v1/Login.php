@@ -9,15 +9,15 @@
 namespace app\api\controller\v1;
 
 
-use app\api\lib\exception\SuccessMessage;
 use app\api\lib\exception\UserException;
+use app\api\model\User as UserModel;
 use app\api\validate\CheckLogin;
 use think\Request;
-use app\api\model\User as UserModel;
+
 class Login
 {
     public function login(Request $request){
-        (new CheckLogin())->goCHeck();
+        (new CheckLogin())->goCheck();
         $name = $request->post('name');
         $password = md5($request->post('password'));
         $user_model = new UserModel;
@@ -32,8 +32,6 @@ class Login
         session('uid',$user['id']);
         session('name',$user['name']);
         session('photo',$user['photo']);
-        return (new SuccessMessage([
-            'data'  =>$user,
-        ]))->success();
+        return json($user,200);
     }
 }

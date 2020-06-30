@@ -27,9 +27,7 @@ class Show
             throw new DiaryException();
         }
         //返回结果
-        return (new SuccessMessage([
-            'data'  =>  $result
-        ]))->success();
+        return json($result,200);
 
     }
 }

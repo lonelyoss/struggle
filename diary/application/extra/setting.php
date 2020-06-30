@@ -10,8 +10,8 @@ return [
 
 
     //发送邮箱
-    'email_username'    =>'your email',
-    'email_password'    =>'your password',
+    'email_username'    =>'1176787685@qq.com',
+    'email_password'    =>'qcotamsiopnbjgbj',
     'email_port'        =>465,
     'email_host'        =>'smtp.qq.com',
     'email_from_name'   =>'struggle diary'

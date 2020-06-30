@@ -30,7 +30,7 @@ class BaseValidate extends Validate
 
         if(!$validate){
             throw new ParamsException([
-                'status'=>200,
+                'status'=>400,
                 'msg'   => $this->error
             ]);
         }else{

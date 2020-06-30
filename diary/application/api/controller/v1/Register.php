@@ -19,6 +19,8 @@ class Register
         //添加数据
         $params = input('post.');
         $params['password'] = md5($params['password']);
+        $user_code = mt_rand(99,999).time();
+        $params['user_code'] = $user_code;
         $user_model = new UserModel($params);
         $user_model->allowField(true)->save();
         //返回结果

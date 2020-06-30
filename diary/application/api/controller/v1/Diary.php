@@ -55,9 +55,7 @@ class Diary extends BaseController
         if(!$diary){
             throw new DiaryException();
         }
-        return (new SuccessMessage([
-            'data'=>$diary
-        ]))->success();
+        return json($diary,200);
     }
 
     private function commonAdd($params,$id=0){

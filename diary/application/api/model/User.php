@@ -11,7 +11,7 @@ namespace app\api\model;
 
 class User extends BaseModel
 {
-    protected $hidden = ['password','email','update_time','delete_time'];
+    protected $hidden = ['password','email','update_time','delete_time','id'];
 
     protected $autoWriteTimestamp =true;
 
@@ -41,16 +41,28 @@ class User extends BaseModel
         return $this->hasOne('UserHometown','uid','id');
     }
 
-    public function getAll($user_id){
+    public function getAll($usr_code){
         $result = $this->with(['todayDiaries'])
-            ->where('id','=',$user_id)
+            ->where('user_code','=',$usr_code)
             ->find();
         return $result;
     }
 
-    public function getUserInfo($user_id){
+    public function getUserInfo($user_code){
         $result = $this->with(['birthday','info','location','hometown'])
-        ->where('id','=',$user_id)->find();
+        ->where('user_code','=',$user_code)->find();
+        if($result->birthday == null){
+            $result->birthday = [];
+        }
+        if($result->info == null){
+            $result->info = [];
+        }
+        if($result->location == null){
+            $result->location = [];
+        }
+        if($result->hometown == null){
+            $result->hometown = [];
+        }
         return $result;
     }
 }

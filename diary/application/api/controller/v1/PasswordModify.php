@@ -19,9 +19,7 @@ class PasswordModify extends BaseController
 {
     public function update(Request $request){
         $this->isLogin();
-        (new CheckID())->goCheck();
         $params = $request->param();
-        $this->checkUser($params['id']);
         (new CheckPassword)->goCheck();
         $password = md5($params['newpassword']);
         $user_model = new UserModel;
